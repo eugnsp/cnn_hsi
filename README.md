@@ -4,9 +4,9 @@
 
 This is a simple deep convolutional neural network for hyperspectral images
 classification. Main aim was to understand how such networks are implemented,
-so no thirt-party DNN libraries were used.
+so no third-party DNN libraries were used.
 
-Network structure follows that described in [1]. It contains 4 layers:
+The network consists of 4 layers [1]:
 
 * Convolutional layer (`tanh`, ~10 filters, kernel size ~20)
 * Pooling layer (`max`, pooling size ~5)
@@ -42,7 +42,7 @@ cmake -DCMAKE_BUILD_TYPE=RELEASE .. && make
 
 C++17 compiler is required. Tested with GCC 8.3.0.
 
-## How to build
+## How to run
 
 [to be written]
 
@@ -61,7 +61,7 @@ C++17 compiler is required. Tested with GCC 8.3.0.
 1. Wei Hu et al. *Deep convolutional neural networks for hyperspectral image
 classification*.\
 [J. Sensors **2015**, article ID 258619 (2015)](https://doi.org/10.1155/2015/258619),
-2. [Hyperspectral remote sensing scenes](http://www.ehu.eus/ccwintco/index.php?title=Hyperspectral_Remote_Sensing_Scenes)
+2. [Hyperspectral remote sensing scenes](http://www.ehu.eus/ccwintco/index.php?title=Hyperspectral_Remote_Sensing_Scenes).
 
 ## License
 

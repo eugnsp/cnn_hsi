@@ -20,7 +20,7 @@ The standard thread support library is used to parallelize the code.
 ## Results
 
 Hyperspectral data from [2] was used to test the network. The image below shows
-the classification result after the specified number of training steps.
+the classification results after the specified number of training iterations.
 
 ![Classification](example/salinas/salinas_sm.png)
 

@@ -44,7 +44,7 @@ int main()
 		}
 	tm.stop();
 
-	std::cout << "Classification took " << tm.sec() << " secs" << std::endl;
+	std::cout << "Classification took " << tm.sec() << " seconds" << std::endl;
 
 	es_la::Matfile_writer mw("output.mat");
 	mw.write("labels", image_labels);

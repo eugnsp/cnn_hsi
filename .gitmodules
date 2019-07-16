@@ -1,0 +1,6 @@
+[submodule "external/es_la"]
+	path = external/es_la
+	url = https://github.com/eugnsp/es_la
+[submodule "external/es_util"]
+	path = external/es_util
+	url = https://github.com/eugnsp/es_util

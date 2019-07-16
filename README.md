@@ -24,7 +24,7 @@ the classification results after the specified number of training iterations.
 
 ![Classification](example/salinas/salinas_sm.png)
 
-([Large image](example/salinas/salinas.png)
+([Large image](example/salinas/salinas.png))
 
 ![Loss function](example/salinas/salinas_loss_fn.png)
 

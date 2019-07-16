@@ -83,10 +83,14 @@ public:
 	}
 
 protected:
-	void init_storage(std::size_t n_rows, std::size_t n_cols)
+	template<class Strategy>
+	void init_storage(std::size_t n_rows, std::size_t n_cols, Strategy&& init_strategy)
 	{
 		params_.weights.resize(n_rows, n_cols);
+		init_strategy(params_.weights);
+
 		params_.biases.resize(n_rows);
+		init_strategy(params_.biases);
 	}
 
 	std::size_t n_trainable_params() const

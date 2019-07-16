@@ -19,10 +19,7 @@ public:
 	void init(Strategy&& init_strategy, const Layer& prev_layer)
 	{
 		output_size_per_kernel_ = get_output_size(prev_layer.output_size());
-		init_storage(n_kernels_, kernel_size_);
-
-		init_strategy(params_.weights);
-		init_strategy(params_.biases);
+		init_storage(n_kernels_, kernel_size_, init_strategy);
 	}
 
 	template<class In, class Out>
@@ -104,5 +101,5 @@ private:
 private:
 	const std::size_t n_kernels_;
 	const std::size_t kernel_size_;
-	std::size_t output_size_per_kernel_;
+	std::size_t output_size_per_kernel_ = 0;
 };

@@ -18,10 +18,7 @@ public:
 	template<class Strategy, class Layer>
 	void init(Strategy&& init_strategy, const Layer& prev_layer)
 	{
-		init_storage(n_nodes_, prev_layer.output_size());
-
-		init_strategy(params_.weights);
-		init_strategy(params_.biases);
+		init_storage(n_nodes_, prev_layer.output_size(), init_strategy);
 	}
 
 	template<class In, class Out>

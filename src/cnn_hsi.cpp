@@ -29,24 +29,20 @@ int main()
 
 	Timer tm;
 	tm.start();
-	const auto loss = network.train(train_set.data, train_set.labels, 1500);
+	const auto loss = network.train(train_set.data, train_set.labels, 100);
 	tm.stop();
 
 	std::cout << "Training took " << tm.sec() << " seconds" << std::endl;
 
 	tm.start();
-	es_la::Matrix_x<double> image_labels(image.rows, image.cols);
-	for (std::size_t row = 0; row < image.rows; ++row)
-		for (std::size_t col = 0; col < image.cols; ++col)
-		{
-			const auto index = row + col * image.rows;
-			image_labels(row, col) = network.classify(image.data.col_view(index))[0];
-		}
+	const auto image_labels = network.classify(image.data);
 	tm.stop();
 
 	std::cout << "Classification took " << tm.sec() << " seconds" << std::endl;
 
 	es_la::Matfile_writer mw("output.mat");
+	mw.write("rows", image.rows);
+	mw.write("cols", image.cols);
 	mw.write("labels", image_labels);
 	mw.write("loss_fn", loss);
 

@@ -6,6 +6,7 @@
 #include <es_util/tuple.hpp>
 #include <es_util/type_traits.hpp>
 
+#include <algorithm>
 #include <array>
 #include <cassert>
 #include <cmath>
@@ -87,48 +88,51 @@ public:
 		return outs;
 	}
 
-	template<class Matrix>
-	es_la::Vector_x<std::size_t> classify(const Matrix& input)
+	template<class In>
+	es_la::Vector_x<std::size_t> classify(const In& in) const
 	{
 		assert(input.rows() == input_size_);
-		// print(input.tr_view());
 
-		const auto outputs = compute_outputs(input);
-		const auto& output = outputs.back();
+		const auto nw = 2;//n_workers();
+		const auto n_samples = in.cols();
+		const auto n_samples_per_worker = (n_samples + nw - 1) / nw;
 
-		// print(output.tr_view());
+		es_la::Vector_x<std::size_t> labels(n_samples);
+		std::vector<std::thread> workers;
 
-		es_la::Vector_x<std::size_t> labels(input.cols());
-		for (std::size_t col = 0; col < input.cols(); ++col)
+		for (std::size_t i = 0; i < nw; ++i)
 		{
-			std::size_t max_index = 0;
-			double max_value = 0;
-			for (std::size_t i = 0; i < output.rows(); ++i)
-				if (output(i, col) > max_value)
+			const auto start_sample = i * n_samples_per_worker;
+			const auto n = std::min(n_samples - start_sample, n_samples_per_worker);
+
+			workers.emplace_back([this, start_sample, n, &in, &labels]()
+			{
+				std::cout << start_sample << ' ' << n << std::endl;
+				const auto outputs = compute_outputs(in.cols_view(start_sample, n));
+				const auto& output = outputs.back();
+
+				// print(output.tr_view());
+
+				for (std::size_t j = 0; j < n; ++j)
 				{
-					max_index = i;
-					max_value = output(i, col);
+					std::size_t max_index = 0;
+					double max_value = 0;
+					for (std::size_t i = 0; i < output.rows(); ++i)
+						if (output(i, j) > max_value)
+						{
+							max_index = i;
+							max_value = output(i, j);
+						}
+
+					labels[start_sample + j] = max_index;
 				}
-			labels[col] = max_index;
+			});
 		}
 
+		for (auto& w : workers)
+			w.join();
+
 		return labels;
-	}
-
-	template<std::size_t index>
-	auto& layer()
-	{
-		return std::get<index>(layers_);
-	}
-
-	auto& first_layer()
-	{
-		return std::get<0>(layers_);
-	}
-
-	auto& last_layer()
-	{
-		return std::get<n_layers - 1>(layers_);
 	}
 
 	template<class In, class Labels>

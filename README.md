@@ -4,7 +4,7 @@
 
 This is a simple deep convolutional neural network for hyperspectral images
 classification. Main aim was to understand how such networks are implemented,
-so no third-party DNN libraries were used.
+so third-party DNN libraries are not used in the code.
 
 The network consists of 4 layers [1]:
 
@@ -14,7 +14,7 @@ The network consists of 4 layers [1]:
 * Output layer (`softmax`, ~10 nodes)
 
 The total number of trainable parameters is ~35,000. The gradient descent
-method with rate ~.03 is used for learning.
+method with rate ~.1 is used for learning.
 
 The standard thread support library is used to parallelize the code.
 
@@ -59,8 +59,8 @@ C++17 compiler is required. Tested with GCC 8.3.0.
 
 ## References
 
-1. Wei Hu et al. *Deep convolutional neural networks for hyperspectral image
-classification*.\
+1. Wei Hu et al. *Deep convolutional neural networks for hyperspectral
+image classification*.\
 [J. Sensors **2015**, article ID 258619 (2015)](https://doi.org/10.1155/2015/258619).
 2. [Hyperspectral remote sensing scenes](http://www.ehu.eus/ccwintco/index.php?title=Hyperspectral_Remote_Sensing_Scenes).
 

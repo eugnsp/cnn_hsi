@@ -29,7 +29,7 @@ int main()
 
 	es_util::Timer tm;
 	tm.start();
-	const auto loss = network.train(train_set.data, train_set.labels, 1500, .03
+	const auto loss = network.train(train_set.data, train_set.labels, 1500, .1
 		, [](std::size_t it, double loss) { std::cout << it << ". " << loss << std::endl; }
 		);
 	tm.stop();

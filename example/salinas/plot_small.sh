@@ -13,16 +13,16 @@ unset border
 unset xtics
 unset ytics
 set size square
-set palette rgb -3,-8,-5
+set palette rgb -8,-3,-4
 
 set xlabel "Groundtruth"
 plot 'gt.txt' matrix with image notitle
 
-set xlabel "500 iterations, 73%"
+set xlabel "500 iterations, 78%"
 plot '500.txt' matrix with image notitle
 
-set xlabel "1000 iterations, 87%"
+set xlabel "1000 iterations, 96%"
 plot '1000.txt' matrix with image notitle
 
-set xlabel "1500 iterations, 91%"
+set xlabel "1500 iterations, 98%"
 plot '1500.txt' matrix with image notitle

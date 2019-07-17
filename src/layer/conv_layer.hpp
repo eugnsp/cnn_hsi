@@ -12,7 +12,8 @@
 class Conv_layer : public Trainable_layer
 {
 public:
-	Conv_layer(std::size_t n_kernels, std::size_t kernel_size) : n_kernels_(n_kernels), kernel_size_(kernel_size)
+	explicit Conv_layer(std::size_t n_kernels, std::size_t kernel_size) :
+		n_kernels_(n_kernels), kernel_size_(kernel_size)
 	{}
 
 	template<class Strategy, class Layer>
@@ -39,7 +40,7 @@ public:
 	}
 
 	template<class In, class Out, class Out_grad>
-	void compute_gradient(const In& in, const Out& out, const Out_grad& out_grad, Parameters& params_grad)
+	void compute_gradient(const In& in, const Out& out, const Out_grad& out_grad, Parameters& params_grad) const
 	{
 		assert(in.cols() == out.cols());
 

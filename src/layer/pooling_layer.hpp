@@ -8,7 +8,7 @@
 class Pooling_layer : public Layer
 {
 public:
-	Pooling_layer(std::size_t pooling_size) : pooling_size_(pooling_size)
+	explicit Pooling_layer(std::size_t pooling_size) : pooling_size_(pooling_size)
 	{}
 
 	template<class Strategy, class Layer>
@@ -44,7 +44,7 @@ public:
 	}
 
 	template<class In, class Out, class In_grad, class Out_grad>
-	void compute_gradient(const In& in, const Out& out, In_grad& in_grad, const Out_grad& out_grad)
+	void compute_gradient(const In& in, const Out& out, In_grad& in_grad, const Out_grad& out_grad) const
 	{
 		assert(in.cols() == out.cols());
 

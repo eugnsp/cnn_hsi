@@ -12,7 +12,7 @@
 class Fc_layer : public Trainable_layer
 {
 public:
-	Fc_layer(std::size_t n_nodes) : n_nodes_(n_nodes)
+	explicit Fc_layer(std::size_t n_nodes) : n_nodes_(n_nodes)
 	{}
 
 	template<class Strategy, class Layer>
@@ -39,7 +39,7 @@ public:
 
 	template<class In, class Out, class In_grad, class Out_grad>
 	void compute_gradient(
-		const In& in, const Out& out, In_grad& in_grad, const Out_grad& out_grad, Parameters& params_grad)
+		const In& in, const Out& out, In_grad& in_grad, const Out_grad& out_grad, Parameters& params_grad) const
 	{
 		assert(out.cols() == in.cols());
 		assert(out_grad.cols() == in.cols());

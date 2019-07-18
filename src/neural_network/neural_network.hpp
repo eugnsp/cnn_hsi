@@ -13,9 +13,7 @@
 #include <cassert>
 #include <cmath>
 #include <cstddef>
-#include <mutex>
 #include <string>
-#include <thread>
 #include <tuple>
 #include <type_traits>
 #include <utility>

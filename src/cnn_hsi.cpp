@@ -16,7 +16,7 @@ int main()
 	std::cout << std::setprecision(10);
 
 	const auto image = read_image("salinas.txt");
-	const auto train_set = read_train_set("salinas_train2.txt", "salinas_train2_labels.txt");
+	const auto train_set = read_train_set("salinas_train.txt", "salinas_train_labels.txt");
 
 	auto network = make_neural_network(
 		Conv_layer(10, 20), Pooling_layer(5), Fc_layer(100), Output_layer(train_set.n_label_values));
@@ -29,7 +29,7 @@ int main()
 
 	es_util::Timer tm;
 	tm.start();
-	const auto loss = network.train(train_set.data, train_set.labels, 200, .1, [](std::size_t it, double loss) {
+	const auto loss = network.train(train_set.data, train_set.labels, 1500, .2, [](std::size_t it, double loss) {
 		if (it % 10 == 0)
 			std::cout << it << ". " << loss << std::endl;
 	});

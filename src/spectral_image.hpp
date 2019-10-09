@@ -1,5 +1,5 @@
 #pragma once
-#include <es_la/dense.hpp>
+#include <esl/dense.hpp>
 
 #include <cstddef>
 #include <fstream>
@@ -10,7 +10,7 @@ struct Spectral_image
 	std::size_t rows;
 	std::size_t cols;
 	std::size_t spectrum_size;
-	es_la::Matrix_xd data;
+	esl::Matrix_xd data;
 };
 
 Spectral_image read_image(const std::string& file_name)

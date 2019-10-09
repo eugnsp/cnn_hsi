@@ -4,9 +4,9 @@
 #include "spectral_train_set.hpp"
 #include "util/print.hpp"
 
-#include <es_la/dense.hpp>
-#include <es_la/io.hpp>
-#include <es_util/timer.hpp>
+#include <esl/dense.hpp>
+#include <esl/io.hpp>
+#include <esu/timer.hpp>
 
 #include <iomanip>
 #include <iostream>
@@ -27,9 +27,10 @@ int main()
 	// network.check_gradients(train_set.data, train_set.labels);
 	// return 0;
 
-	es_util::Timer tm;
+	esu::Timer tm;
 	tm.start();
-	const auto loss = network.train(train_set.data, train_set.labels, 1500, .2, [](std::size_t it, double loss) {
+	const auto loss = network.train(train_set.data, train_set.labels, 1500, .2, [](std::size_t it, double loss)
+	{
 		if (it % 10 == 0)
 			std::cout << it << ". " << loss << std::endl;
 	});
@@ -43,7 +44,7 @@ int main()
 
 	std::cout << "Classification took " << tm.sec() << " seconds" << std::endl;
 
-	es_la::Matfile_writer mw("output.mat");
+	esl::Matfile_writer mw("output.mat");
 	mw.write("rows", image.rows);
 	mw.write("cols", image.cols);
 	mw.write("labels", image_labels);

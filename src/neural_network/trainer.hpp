@@ -1,6 +1,6 @@
 #pragma once
-#include <es_la/dense.hpp>
-#include <es_util/thread.hpp>
+#include <esl/dense.hpp>
+#include <esu/thread.hpp>
 
 #include <algorithm>
 #include <cassert>
@@ -18,7 +18,7 @@ public:
 	{}
 
 	template<class In, class Labels, class Callback_fn>
-	es_la::Vector_xd operator()(
+	esl::Vector_xd operator()(
 		const In& in, const Labels& labels, unsigned int n_iters, double rate, Callback_fn callback_fn)
 	{
 		assert(in.cols() == labels.size());
@@ -30,10 +30,10 @@ public:
 		std::vector<std::thread> workers;
 
 		std::vector<typename Network::Layers_parameters> wrk_param_grads(n_workers);
-		es_la::Vector_xd wrk_loss_function(n_workers);
-		es_la::Vector_xd loss_function(n_iters);
+		esl::Vector_xd wrk_loss_function(n_workers);
+		esl::Vector_xd loss_function(n_iters);
 
-		es_util::Barrier barrier(n_workers, [&, this](std::size_t it)
+		esu::Barrier barrier(n_workers, [&, this](std::size_t it)
 		{
 			for (auto& p : wrk_param_grads)
 				network_.add_gradients(-rate / n_samples, p);

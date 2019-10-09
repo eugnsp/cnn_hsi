@@ -1,5 +1,5 @@
 #pragma once
-#include <es_la/dense.hpp>
+#include <esl/dense.hpp>
 
 #include <algorithm>
 #include <cassert>
@@ -17,13 +17,13 @@ public:
 	{}
 
 	template<class In>
-	es_la::Vector_x<std::size_t> operator()(const In& in) const
+	esl::Vector_x<std::size_t> operator()(const In& in) const
 	{
 		const auto n_workers = std::max(1u, std::thread::hardware_concurrency());
 		const auto n_samples = in.cols();
 		const auto n_samples_per_worker = (n_samples + n_workers - 1) / n_workers;
 
-		es_la::Vector_x<std::size_t> labels(n_samples);
+		esl::Vector_x<std::size_t> labels(n_samples);
 		std::vector<std::thread> workers;
 
 		for (unsigned int i = 0; i < n_workers; ++i)

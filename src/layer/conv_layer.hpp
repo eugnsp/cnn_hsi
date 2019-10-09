@@ -1,8 +1,8 @@
 #pragma once
 #include "layer.hpp"
 
-#include <es_la/dense.hpp>
-#include <es_util/numeric.hpp>
+#include <esl/dense.hpp>
+#include <esu/numeric.hpp>
 
 #include <mkl_types.h>
 #include <mkl_vsl.h>
@@ -83,10 +83,10 @@ public:
 
 		const auto n = in.cols();
 
-		es_la::Matrix_xd m(out.rows(), n);
+		esl::Matrix_xd m(out.rows(), n);
 		for (std::size_t j = 0; j < n; ++j)
 			for (std::size_t i = 0; i < out.rows(); ++i)
-				m(i, j) = (1 - es_util::sq(out(i, j))) * out_grad(i, j);
+				m(i, j) = (1 - esu::sq(out(i, j))) * out_grad(i, j);
 
 		for (std::size_t col = 0; col < n; ++col)
 			for (std::size_t k = 0; k < n_kernels_; ++k)

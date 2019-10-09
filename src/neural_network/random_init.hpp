@@ -1,5 +1,5 @@
 #pragma once
-#include <es_la/dense.hpp>
+#include <esl/dense.hpp>
 
 #include <cstddef>
 #include <random>
@@ -15,10 +15,10 @@ public:
 	}
 
 	template<std::size_t rows, std::size_t cols>
-	void operator()(es_la::Matrix_d<rows, cols>& matrix)
+	void operator()(esl::Matrix_d<rows, cols>& matrix)
 	{
 		std::uniform_real_distribution<double> distr(-max_, max_);
-		matrix = es_la::Random_matrix(matrix.rows(), matrix.cols(), distr, generator_);
+		matrix = esl::Random_matrix(matrix.rows(), matrix.cols(), distr, generator_);
 	}
 
 private:

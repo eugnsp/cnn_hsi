@@ -1,5 +1,5 @@
 #pragma once
-#include <es_la/dense.hpp>
+#include <esl/dense.hpp>
 
 #include <cassert>
 #include <cstddef>
@@ -11,8 +11,8 @@ struct Spectral_train_set
 	std::size_t size;
 	std::size_t spectrum_size;
 	std::size_t n_label_values;
-	es_la::Vector_x<std::size_t> labels;
-	es_la::Matrix_xd data;
+	esl::Vector_x<std::size_t> labels;
+	esl::Matrix_xd data;
 };
 
 Spectral_train_set read_train_set(const std::string& data_file_name, const std::string& labels_file_name)

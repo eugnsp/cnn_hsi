@@ -4,3 +4,9 @@
 [submodule "external/es_util"]
 	path = external/es_util
 	url = https://github.com/eugnsp/es_util
+[submodule "external/esl"]
+	path = external/esl
+	url = https://github.com/eugnsp/esl.git
+[submodule "external/esu"]
+	path = external/esu
+	url = https://github.com/eugnsp/esu.git

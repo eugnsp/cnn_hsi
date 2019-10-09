@@ -1,8 +1,8 @@
 #pragma once
 #include "layer.hpp"
 
-#include <es_la/dense.hpp>
-#include <es_util/numeric.hpp>
+#include <esl/dense.hpp>
+#include <esu/numeric.hpp>
 
 #include <cassert>
 #include <cmath>
@@ -76,13 +76,13 @@ public:
 
 private:
 	template<class Out>
-	es_la::Matrix_xd compute_jacobian(es_la::Matrix_xd out_grad, const Out& out) const
+	esl::Matrix_xd compute_jacobian(esl::Matrix_xd out_grad, const Out& out) const
 	{
 		const auto n = out.cols();
 
 		for (std::size_t j = 0; j < n; ++j)
 			for (std::size_t i = 0; i < n_nodes_; ++i)
-				out_grad(i, j) *= (1 - es_util::sq(out(i, j)));
+				out_grad(i, j) *= (1 - esu::sq(out(i, j)));
 
 		return out_grad;
 	}

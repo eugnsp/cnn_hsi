@@ -1,6 +1,6 @@
 #pragma once
 #include "layer.hpp"
-#include <es_la/dense.hpp>
+#include <esl/dense.hpp>
 
 #include <cassert>
 #include <cstddef>

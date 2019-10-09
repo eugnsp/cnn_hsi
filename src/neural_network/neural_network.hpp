@@ -4,9 +4,9 @@
 #include "classifier.hpp"
 #include "trainer.hpp"
 
-#include <es_la/dense.hpp>
-#include <es_util/tuple.hpp>
-#include <es_util/type_traits.hpp>
+#include <esl/dense.hpp>
+#include <esu/tuple.hpp>
+#include <esu/type_traits.hpp>
 
 #include <algorithm>
 #include <array>
@@ -30,7 +30,7 @@ public:
 	static constexpr auto n_layers = sizeof...(Layers);
 	static_assert(n_layers >= 2);
 
-	using Layers_outputs = std::array<es_la::Matrix_xd, n_layers>;
+	using Layers_outputs = std::array<esl::Matrix_xd, n_layers>;
 	using Layers_parameters = std::tuple<typename Layers::Parameters...>;
 
 private:
@@ -95,14 +95,14 @@ public:
 	}
 
 	template<class In>
-	es_la::Vector_x<std::size_t> classify(const In& in) const
+	esl::Vector_x<std::size_t> classify(const In& in) const
 	{
 		assert(in.rows() == input_size_);
 		return internal::Classifier{*this}(in);
 	}
 
 	template<class In, class Labels, class Callback_fn>
-	es_la::Vector_xd train(
+	esl::Vector_xd train(
 		const In& in, const Labels& labels, unsigned int n_iters, double rate, Callback_fn callback_fn)
 	{
 		assert(in.rows() == input_size_);
@@ -110,7 +110,7 @@ public:
 	}
 
 	template<class In, class Labels>
-	es_la::Vector_xd train(const In& in, const Labels& labels, unsigned int n_iters, double rate)
+	esl::Vector_xd train(const In& in, const Labels& labels, unsigned int n_iters, double rate)
 	{
 		return train(in, labels, n_iters, rate, [](auto...) {});
 	}
@@ -120,7 +120,7 @@ public:
 		std::string info = "Neural network contains " + std::to_string(n_layers) + " layers:\n";
 		std::size_t i = 1;
 
-		es_util::tuple_for_each(
+		esu::tuple_for_each(
 			[&info, &i](auto& layer) { info += std::to_string(i++) + ". " + layer.info_string(); }, layers_);
 
 		return info;
@@ -220,5 +220,5 @@ private:
 template<class... Layers>
 auto make_neural_network(Layers&&... layers)
 {
-	return Neural_network<es_util::Remove_cv_ref<Layers>...>(std::forward<Layers>(layers)...);
+	return Neural_network<esu::Remove_cv_ref<Layers>...>(std::forward<Layers>(layers)...);
 }

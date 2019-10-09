@@ -1,5 +1,5 @@
 #pragma once
-#include <es_la/dense.hpp>
+#include <esl/dense.hpp>
 
 #include <cstddef>
 
@@ -10,7 +10,7 @@ public:
 	{}
 
 	template<std::size_t rows, std::size_t cols>
-	void operator()(es_la::Matrix_d<rows, cols>& matrix)
+	void operator()(esl::Matrix_d<rows, cols>& matrix)
 	{
 		matrix = value_;
 	}

@@ -24,10 +24,10 @@ endif()
 
 target_link_directories(cnn_hsi PRIVATE "${MKL_LIB}")
 
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/external/es_util")
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/external/es_la")
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/external/esu")
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/external/esl")
 
 set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
 find_package(Threads REQUIRED)
 
-target_link_libraries(cnn_hsi es_la es_util Threads::Threads)
+target_link_libraries(cnn_hsi esl esu Threads::Threads)

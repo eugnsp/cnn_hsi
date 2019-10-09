@@ -1,7 +1,7 @@
 #pragma once
 #include "layer.hpp"
 
-#include <es_la/dense.hpp>
+#include <esl/dense.hpp>
 
 #include <cassert>
 #include <cmath>
@@ -53,15 +53,15 @@ public:
 		const auto n = in.cols();
 		in_grad.resize(in.rows(), n);
 
-		es_la::Matrix_xd m = out_grad;
+		esl::Matrix_xd m = out_grad;
 		for (std::size_t j = 0; j < n; ++j)
 			for (std::size_t i = 0; i < n_nodes_; ++i)
 				m(i, j) *= out(i, j);
 
-		es_la::Matrix_xd m2 = m;
+		esl::Matrix_xd m2 = m;
 		for (std::size_t j = 0; j < n; ++j)
 		{
-			const auto sum = es_la::sum(m.col_view(j));
+			const auto sum = esl::sum(m.col_view(j));
 			m2.col_view(j) -= sum * out.col_view(j);
 		}
 
